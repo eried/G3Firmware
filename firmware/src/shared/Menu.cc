@@ -1147,8 +1147,7 @@ void MonitorMode::update(LiquidCrystal& lcd, bool forceRedraw) {
 			lcd.writeFromPgmspace(platform_temp);
 
 			lcd.setCursor(15,3);
-			if ( command::getPauseAtZPos() == 0 )	lcd.write(' ');
-			else					lcd.write('*');
+			lcd.write(command::getPauseAtZPos() == 0?' ':'*');
 		}
 	}
 
