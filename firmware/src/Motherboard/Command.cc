@@ -54,7 +54,7 @@ volatile uint32_t recentCommandClock = 0;
 volatile uint32_t recentCommandTime = 0;
 
 #ifdef PAUSEATZPOS
-volatile int32_t  pauseZPos = 0;
+volatile int32_t  pauseZPos = 0, lastZPos = 0;
 #endif
 
 bool estimating = false;
@@ -398,9 +398,12 @@ void runCommandSlice() {
 
 #ifdef PAUSEATZPOS
 	//If we've reached Pause @ ZPos, then pause
-	if ((( pauseZPos != 0) && ( ! isPaused() ) &&
+	if ((( pauseZPos != 0) && ( ! isPaused() ) && (steppers::getPosition()[2] > lastZPos) &&
 	    ( steppers::getPosition()[2]) >= pauseZPos ) && ( ! estimating )) 
 		pause(true);
+		
+	// Remember the last position to pause only when printing, not at the start (going down in Z axis)
+	lastZPos = steppers::getPosition()[2];
 #endif
 
 #ifdef HAS_BUILD_ESTIMATION
