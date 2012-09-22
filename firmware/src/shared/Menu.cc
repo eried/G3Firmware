@@ -9,7 +9,7 @@
 #include "Menu.hh"
 #include "Configuration.hh"
 
-// TODO: Kill this, should be hanlded by build system.
+// TODO: Kill this, should be handled by build system.
 #ifdef HAS_INTERFACE_BOARD
 
 #include "StepperAccel.hh"
@@ -1487,7 +1487,7 @@ void VersionMode::update(LiquidCrystal& lcd, bool forceRedraw) {
 	const static PROGMEM prog_uchar version1[] = "Placa madre: _._";
 	const static PROGMEM prog_uchar version2[] = "   Extrusor: _._";
 	const static PROGMEM prog_uchar version3[] = "3.4z (es-la)";
-	const static PROGMEM prog_uchar version4[] = "B SRAM libre";
+	const static PROGMEM prog_uchar version4[] = " bytes libres";
 
 	if (forceRedraw) {
 		lcd.clear();
@@ -1569,7 +1569,7 @@ void Menu::update(LiquidCrystal& lcd, bool forceRedraw) {
 	}
 
 	lcd.setCursor(0,(itemIndex%height));
-	lcd.write('>');
+	lcd.write(3);
 	lastDrawIndex = itemIndex;
 }
 
@@ -2439,10 +2439,11 @@ void EnabledDisabledMenu::drawItem(uint8_t index, LiquidCrystal& lcd) {
 
 	switch (index) {
 	case 0:
+    lcd.setCursor(0,0);
 		lcd.writeString(msg1);
 		break;
 	case 1:
-		if ( msg2 ) lcd.writeString(msg2);
+		if ( msg2 ) {lcd.setCursor(0,1); lcd.writeString(msg2);}
 		break;
 	case 2:
 		lcd.writeFromPgmspace(disable);
@@ -3700,7 +3701,7 @@ void Extruder5DMenu::enable(bool enabled) {
 
 void Extruder5DMenu::setupTitle() {
 	msg1 = "Extr invertido";
-	msg2 = "(5D only):";
+	msg2 = "(solo con 5D):";
 }
 
 StepperDriverAcceleratedMenu::StepperDriverAcceleratedMenu() {
@@ -4151,7 +4152,7 @@ void CurrentPositionMode::update(LiquidCrystal& lcd, bool forceRedraw) {
 	const static PROGMEM prog_uchar msg2[] = "Y:";
 	const static PROGMEM prog_uchar msg3[] = "Z:";
 	const static PROGMEM prog_uchar msg4[] = "A:";
-	const static PROGMEM prog_uchar mm[] = "mm";
+	const static PROGMEM prog_uchar mm[] = " mm";
 
 	if (forceRedraw) {
 		lcd.clear();
@@ -4885,7 +4886,7 @@ void HomingFeedRatesMode::update(LiquidCrystal& lcd, bool forceRedraw) {
 	const static PROGMEM prog_uchar message1z[] = "eje Z:";
 	const static PROGMEM prog_uchar message4[]  = "Arriba/Abajo  OK";
 	const static PROGMEM prog_uchar blank[]     = " ";
-	const static PROGMEM prog_uchar mm[]        = "mm/min ";
+	const static PROGMEM prog_uchar mm[]        = " mm/min";
 
 	if ( homingFeedRateState != lastHomingFeedRateState )	forceRedraw = true;
 
@@ -4925,7 +4926,7 @@ void HomingFeedRatesMode::update(LiquidCrystal& lcd, bool forceRedraw) {
 			break;
 	}
 
-	lcd.setCursor(0,1);
+	lcd.setCursor(0,2);
 	lcd.writeFloat((float)feedRate, 0);
 	lcd.writeFromPgmspace(mm);
 

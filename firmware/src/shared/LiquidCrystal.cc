@@ -38,6 +38,18 @@ uint8_t thermometer[8] = {
 	0x0E,	//01110
 };
 
+uint8_t arrow[8] = {
+	0x00,	//00000
+	0x04,	//00100
+	0x02,	//00010
+	0x1F,	//11111
+	0x02,	//00010
+	0x04,	//00100
+	0x00,	//00000
+	0x00	//00000
+};
+
+
 // When the display powers up, it is configured as follows:
 //
 // 1. Display clear
@@ -234,9 +246,10 @@ void LiquidCrystal::begin(uint8_t cols, uint8_t lines, uint8_t dotsize) {
   // set the entry mode
   command(LCD_ENTRYMODESET | _displaymode);
 
-  //Create 2 custom characters
+  //Create custom characters
   createChar(1,degree);
   createChar(2,thermometer);
+  createChar(3,arrow);
 }
 
 /********** high level commands, for the user! */
