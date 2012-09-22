@@ -294,6 +294,7 @@ private:
 
 public:
 	char *message1;
+	char *message2;
 	char *units;
 	uint16_t location;
 	uint8_t default_value;
