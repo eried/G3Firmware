@@ -211,6 +211,6 @@
 //If defined, enable an additional Utilities menu that allows erasing, saving and loading
 //of eeprom data
 //WARNING: This probably will not fit on a 1280 (mb24).
-//#define EEPROM_MENU_ENABLE
+#define EEPROM_MENU_ENABLE
 
 #endif // BOARDS_RRMBV12_CONFIGURATION_HH_

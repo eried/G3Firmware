@@ -1486,8 +1486,8 @@ void MonitorMode::notifyButtonPressed(ButtonArray::ButtonName button) {
 void VersionMode::update(LiquidCrystal& lcd, bool forceRedraw) {
 	const static PROGMEM prog_uchar version1[] = "Placa madre: _._";
 	const static PROGMEM prog_uchar version2[] = "   Extrusor: _._";
-	const static PROGMEM prog_uchar version3[] = "   Revision: ___";
-	const static PROGMEM prog_uchar version4[] = "Ram disp: ";
+	const static PROGMEM prog_uchar version3[] = "3.4z (es-la)";
+	const static PROGMEM prog_uchar version4[] = "B SRAM libre";
 
 	if (forceRedraw) {
 		lcd.clear();
@@ -1524,12 +1524,12 @@ void VersionMode::update(LiquidCrystal& lcd, bool forceRedraw) {
 			lcd.writeString("X.X");
 		}
 
-		lcd.setCursor(12, 2);
-		lcd.writeString(STR(SVN_VERSION));
+/*		lcd.setCursor(12, 2);
+		lcd.writeString(STR(SVN_VERSION));*/
 
 		lcd.setCursor(0,3);
-		lcd.writeFromPgmspace(version4);
 		lcd.writeFloat((float)StackCount(),0);
+		lcd.writeFromPgmspace(version4);
 	} else {
 	}
 }
@@ -1780,9 +1780,10 @@ void CancelBuildMenu::handleSelect(uint8_t index) {
 }
 
 MainMenu::MainMenu() {
-	itemCount = 21;
 #ifdef EEPROM_MENU_ENABLE
-	itemCount ++;
+	itemCount = 22;
+#else
+	itemCount = 21;
 #endif
 	reset();
 
@@ -1820,7 +1821,7 @@ void MainMenu::drawItem(uint8_t index, LiquidCrystal& lcd) {
 	const static PROGMEM prog_uchar stepsPerMm[]	= "Razon pasos:mm";
 	const static PROGMEM prog_uchar homingRates[]	= "Velocidades ";
 	const static PROGMEM prog_uchar versions[]	= "Acerca de";
-	const static PROGMEM prog_uchar eeprom[]	= "Eeprom";
+	const static PROGMEM prog_uchar eeprom[]	= "EEPROM";
 
 	switch (index) {
 	case 0:
@@ -4996,9 +4997,9 @@ void EepromMenu::resetState() {
 }
 
 void EepromMenu::drawItem(uint8_t index, LiquidCrystal& lcd) {
-	const static PROGMEM prog_uchar message_dump[]		= "Eeprom -> SD";
-	const static PROGMEM prog_uchar message_restore[]	= "SD -> Eeprom";
-	const static PROGMEM prog_uchar message_erase[]		= "Borrar Eeprom";
+	const static PROGMEM prog_uchar message_dump[]		= "EEPROM -> SD";
+	const static PROGMEM prog_uchar message_restore[]	= "SD -> EEPROM";
+	const static PROGMEM prog_uchar message_erase[]		= "Borrar EEPROM";
 	switch (index)
 	{
 		case 0:
