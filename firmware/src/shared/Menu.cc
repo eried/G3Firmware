@@ -651,7 +651,7 @@ void ExtruderMode::update(LiquidCrystal& lcd, bool forceRedraw) {
 			uint16_t data = responsePacket.read16(1);
 			lcd.writeInt(data,3);
 		} else {
-			lcd.writeString("XXX");
+			lcd.writeString("###");
 		}
 		break;
 
@@ -661,7 +661,7 @@ void ExtruderMode::update(LiquidCrystal& lcd, bool forceRedraw) {
 			uint16_t data = responsePacket.read16(1);
 			lcd.writeInt(data,3);
 		} else {
-			lcd.writeString("XXX");
+			lcd.writeString("###");
 		}
 		break;
 	}
@@ -1082,7 +1082,7 @@ void MonitorMode::update(LiquidCrystal& lcd, bool forceRedraw) {
 	const static PROGMEM prog_uchar time_left_secs[]     =   "segs";
 	const static PROGMEM prog_uchar time_left_none[]     =   "   n/a ";
 	const static PROGMEM prog_uchar zpos[] 		     =   "Altura:         ";
-	const static PROGMEM prog_uchar speed[] 	     =   "Acc:            ";
+	const static PROGMEM prog_uchar speed[] 	     =   "Vel:            ";
 	const static PROGMEM prog_uchar zpos_mm[] 	     =   "mm";
 	const static PROGMEM prog_uchar estimate2[]          =   "Estimando:    0%";
 	const static PROGMEM prog_uchar estimate3[]          =   "        (omitir)";
@@ -1219,7 +1219,7 @@ void MonitorMode::update(LiquidCrystal& lcd, bool forceRedraw) {
 			uint16_t data = responsePacket.read16(1);
 			lcd.writeInt(data,3);
 		} else {
-			lcd.writeString("XXX");
+			lcd.writeString("###");
 		}
 		break;
 
@@ -1230,7 +1230,7 @@ void MonitorMode::update(LiquidCrystal& lcd, bool forceRedraw) {
 			data = responsePacket.read16(1);
 			lcd.writeInt(data,3);
 		} else {
-			lcd.writeString("XXX");
+			lcd.writeString("###");
 		}
 
 		lcd.setCursor(5,2);
@@ -1238,10 +1238,10 @@ void MonitorMode::update(LiquidCrystal& lcd, bool forceRedraw) {
 			flashingTool = false;
 			uint8_t ready = responsePacket.read8(1);
 			if ( data != 0 ) {
-				if ( ready ) lcd.write(2);
+				if ( ready ) lcd.write(3);
 				else	     flashingTool = true;
 			}
-			else	lcd.write(' ');
+			else	lcd.write(2);
 		}
 		break;
 
@@ -1251,7 +1251,7 @@ void MonitorMode::update(LiquidCrystal& lcd, bool forceRedraw) {
 			uint16_t data = responsePacket.read16(1);
 			lcd.writeInt(data,3);
 		} else {
-			lcd.writeString("XXX");
+			lcd.writeString("###");
 		}
 		break;
 
@@ -1261,7 +1261,7 @@ void MonitorMode::update(LiquidCrystal& lcd, bool forceRedraw) {
 			data = responsePacket.read16(1);
 			lcd.writeInt(data,3);
 		} else {
-			lcd.writeString("XXX");
+			lcd.writeString("###");
 		}
 
 		lcd.setCursor(5,3);
@@ -1359,8 +1359,7 @@ void MonitorMode::update(LiquidCrystal& lcd, bool forceRedraw) {
 			case BUILD_TIME_PHASE_ZPOS:
 				lcd.setCursor(0,1);
 				lcd.writeFromPgmspace(zpos);
-				lcd.setCursor(6,1);
-
+				lcd.setCursor(8,1);
 				position = steppers::getPosition();
 			
 				//Divide by the axis steps to mm's
@@ -1569,7 +1568,7 @@ void Menu::update(LiquidCrystal& lcd, bool forceRedraw) {
 	}
 
 	lcd.setCursor(0,(itemIndex%height));
-	lcd.write(3);
+	lcd.write(4);
 	lastDrawIndex = itemIndex;
 }
 

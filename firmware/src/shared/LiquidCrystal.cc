@@ -28,14 +28,25 @@ uint8_t degree[8] =
 };
 
 uint8_t thermometer[8] = {
-	0x04,	//00100
-	0x0A,	//01010
-	0x0A,	//01010
-	0x0A,	//01010
-	0x0A,	//01010
-	0x11,	//10001
-	0x11,	//10001
-	0x0E,	//01110
+  0x09,	//01001
+  0x12,	//10010
+  0x12,	//10010
+  0x09,	//01001
+  0x09,	//01001
+  0x12,	//10010
+  0x00,	//00000
+  0x1F	//11111
+};
+
+uint8_t thermometer_off[8] = {
+  0x09,	//01001
+  0x12,	//10010
+  0x12,	//10010
+  0x09,	//01001
+  0x09,	//01001
+  0x12,	//10010
+  0x00,	//00000
+  0x00	//00000
 };
 
 uint8_t arrow[8] = {
@@ -249,7 +260,8 @@ void LiquidCrystal::begin(uint8_t cols, uint8_t lines, uint8_t dotsize) {
   //Create custom characters
   createChar(1,degree);
   createChar(2,thermometer);
-  createChar(3,arrow);
+  createChar(3,thermometer_off);
+  createChar(4,arrow);
 }
 
 /********** high level commands, for the user! */

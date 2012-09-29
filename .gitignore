@@ -6,3 +6,4 @@ html
 *.o
 *.svn
 *.DS_store
+*.map
