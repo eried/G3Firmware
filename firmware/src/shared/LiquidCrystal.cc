@@ -15,8 +15,7 @@
 
 //Custom display characters (Courtesy of Tonokip)
 
-uint8_t degree[8] =
-{
+uint8_t degree[8] ={
 	0x0C,	//01100
 	0x12,	//10010
 	0x12,	//10010
@@ -24,29 +23,51 @@ uint8_t degree[8] =
 	0x00,	//00000
 	0x00,	//00000
 	0x00,	//00000
+	0x00	//00000
+};
+
+uint8_t extruder_normal[8] = {
+	0x11,	//10001
+	0x1F,	//11111
+	0x0A,	//01010
+	0x0A,	//01010
+	0x0A,	//01010
+	0x0E,	//01110
+	0x04,	//00100
+	0x00	//00000
+};
+
+uint8_t extruder_heating[8] = {
+	0x11,	//10001
+	0x1F,	//11111
+	0x0E,	//01110
+	0x0E,	//01110
+	0x0E,	//01110
+	0x0E,	//01110
+	0x04,	//00100
+	0x00	//00000
+};
+
+uint8_t platform_normal[8] = {
+	0x12,	//10010
+	0x09,	//01001
+	0x12,	//10010
+	0x09,	//01001
 	0x00,	//00000
+	0x1F,	//11111
+	0x11,	//10001
+	0x00	//00000
 };
 
-uint8_t thermometer[8] = {
-  0x09,	//01001
-  0x12,	//10010
-  0x12,	//10010
-  0x09,	//01001
-  0x09,	//01001
-  0x12,	//10010
-  0x00,	//00000
-  0x1F	//11111
-};
-
-uint8_t thermometer_off[8] = {
-  0x09,	//01001
-  0x12,	//10010
-  0x12,	//10010
-  0x09,	//01001
-  0x09,	//01001
-  0x12,	//10010
-  0x00,	//00000
-  0x00	//00000
+uint8_t platform_heating[8] = {
+	0x12,	//10010
+	0x09,	//01001
+	0x12,	//10010
+	0x09,	//01001
+	0x00,	//00000
+	0x1F,	//11111
+	0x1F,	//11111
+	0x00	//00000
 };
 
 uint8_t arrow[8] = {
@@ -259,9 +280,11 @@ void LiquidCrystal::begin(uint8_t cols, uint8_t lines, uint8_t dotsize) {
 
   //Create custom characters
   createChar(1,degree);
-  createChar(2,thermometer);
-  createChar(3,thermometer_off);
-  createChar(4,arrow);
+  createChar(2,extruder_normal);
+  createChar(3,extruder_heating);
+  createChar(4,platform_normal);
+  createChar(5,platform_heating);
+  createChar(6,arrow);
 }
 
 /********** high level commands, for the user! */

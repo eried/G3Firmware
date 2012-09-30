@@ -309,7 +309,7 @@ void SplashScreen::update(LiquidCrystal& lcd, bool forceRedraw) {
 	const static PROGMEM prog_uchar splash1[] = "                ";
 	const static PROGMEM prog_uchar splash2[] = " Thing-O-Matic  ";
 	const static PROGMEM prog_uchar splash3[] = "   ---------    ";
-	const static PROGMEM prog_uchar splash4[] = "                ";
+//	const static PROGMEM prog_uchar splash4[] = "                ";
 
 
 	if (forceRedraw) {
@@ -323,9 +323,9 @@ void SplashScreen::update(LiquidCrystal& lcd, bool forceRedraw) {
 		lcd.writeFromPgmspace(splash3);
 
 		lcd.setCursor(0,3);
-		lcd.writeFromPgmspace(splash4);
-		lcd.setCursor(11,3);
-                lcd.writeString(STR(SVN_VERSION));
+		lcd.writeFromPgmspace(splash1);
+		//lcd.setCursor(11,3);
+    //            lcd.writeString(STR(SVN_VERSION));
 	}
 	else {
 		// The machine has started, so we're done!
@@ -1202,11 +1202,11 @@ void MonitorMode::update(LiquidCrystal& lcd, bool forceRedraw) {
 
 	if ( flashingTool ) {
 		lcd.setCursor(5,2);
-		lcd.write(toggleHeating?' ':2);
+		lcd.write(toggleHeating?3:2);
 	}
 	if ( flashingPlatform ) {
 		lcd.setCursor(5,3);
-		lcd.write(toggleHeating?' ':2);
+		lcd.write(toggleHeating?5:4);
 	}
 
 	OutPacket responsePacket;
@@ -1241,7 +1241,7 @@ void MonitorMode::update(LiquidCrystal& lcd, bool forceRedraw) {
 				if ( ready ) lcd.write(3);
 				else	     flashingTool = true;
 			}
-			else	lcd.write(2);
+			else	lcd.write(' ');
 		}
 		break;
 
@@ -1269,7 +1269,7 @@ void MonitorMode::update(LiquidCrystal& lcd, bool forceRedraw) {
 			flashingPlatform = false;
 			uint8_t ready = responsePacket.read8(1);
 			if ( data != 0 ) {
-				if ( ready ) lcd.write(2);
+				if ( ready ) lcd.write(5);
 				else	     flashingPlatform = true;
 			}
 			else	lcd.write(' ');
@@ -1568,7 +1568,7 @@ void Menu::update(LiquidCrystal& lcd, bool forceRedraw) {
 	}
 
 	lcd.setCursor(0,(itemIndex%height));
-	lcd.write(4);
+	lcd.write(6);
 	lastDrawIndex = itemIndex;
 }
 
